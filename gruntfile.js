@@ -74,6 +74,7 @@ module.exports = function(grunt) {
           specs: 'test/spec/**/*.js',
           vendor: [
             'bower_components/angular/angular.js',
+            'bower_components/selection-model/dist/selection-model.js',
             'bower_components/angular-mocks/angular-mocks.js'
           ]
         }
