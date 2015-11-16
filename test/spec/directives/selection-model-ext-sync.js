@@ -109,6 +109,26 @@ describe('Directive: selectionModelExtSync', function() {
       expect(scope.bag[1].selected).toBe(true);
       expect(scope.bag[2].selected).toBe(false);
     });
+
+    it('should revalidate on selmExtSync_validate', function() {
+      scope.selectedThings = [{id: 'bar'}];
+      var $el = c([
+        '<ul>',
+          '<li ng-repeat="thing in bag"',
+              'selection-model',
+              'selection-model-selected-items="selectedThings"',
+              'selection-model-ext-sync>',
+          '</li>',
+        '</ul>'
+      ]);
+      scope.selectedThings.length = 0;
+      scope.selectedThings.push({id: 'foo'});
+      scope.$broadcast('selmExtSync_validate');
+      scope.$apply();
+      expect(scope.bag[0].selected).toBe(true);
+      expect(scope.bag[1].selected).toBe(false);
+      expect(scope.bag[2].selected).toBe(false);
+    });
   }); // END: with default provider settings
 
   it('should allow you to configure a default id property', function() {
