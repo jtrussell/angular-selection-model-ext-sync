@@ -123,7 +123,7 @@ describe('Directive: selectionModelExtSync', function() {
       ]);
       scope.selectedThings.length = 0;
       scope.selectedThings.push({id: 'foo'});
-      scope.$broadcast('selmExtSync_validate');
+      scope.$broadcast('eventSelectionModelExt_validate');
       scope.$apply();
       expect(scope.bag[0].selected).toBe(true);
       expect(scope.bag[1].selected).toBe(false);

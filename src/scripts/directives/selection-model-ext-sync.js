@@ -42,15 +42,21 @@ angular.module('selectionModel.ext.sync')
         var smItem = scope.$eval(attrs.ngRepeat.split(' in ')[0]) || {}
           , smItemId = smItem[idAttr];
 
-        for(var ix = selectedItems.length; ix--;) {
-          if(smItemId === selectedItems[ix][idAttr]) {
-            smItem[selectedAttr] = true;
-            selectedItems[ix] = smItem;
-            break;
-          } else {
-            smItem[selectedAttr] = false;
+        var validateSelection = function() {
+          for(var ix = selectedItems.length; ix--;) {
+            if(smItemId === selectedItems[ix][idAttr]) {
+              smItem[selectedAttr] = true;
+              selectedItems[ix] = smItem;
+              break;
+            } else {
+              smItem[selectedAttr] = false;
+            }
           }
-        }
+        };
+
+        validateSelection();
+
+        scope.$on('eventSelectionModelExt_validate', validateSelection);
       }
     };
   }]);
